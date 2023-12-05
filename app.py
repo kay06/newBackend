@@ -22,15 +22,14 @@ class User(db.Model):
     admin_status = db.Column(db.Boolean, default=False)
 
 
-    def __init__(self, name, email, password, admin_status):
+    def __init__(self, name, email, password):
         self.name = name
         self.email = email
         self.password = password
-        self.admin_status = admin_status
 
 class UserSchema(ma.Schema):
     class Meta:
-        fields = ('name', 'email', 'password', 'admin_status')
+        fields = ('name', 'email', 'password')
 
 user_schema = UserSchema()
 users_schema = UserSchema(many=True)
@@ -84,7 +83,6 @@ def add_user():
     name = request.json['name']
     email = request.json['email']
     password = request.json['password']
-    admin_status = False
 
     existing_user = User.query.filter_by(email=email).first()
     if existing_user:
@@ -94,7 +92,7 @@ def add_user():
     salt = bcrypt.gensalt()
     hash = bcrypt.hashpw(bytes, salt) 
 
-    new_user = User(name, email, hash, admin_status)
+    new_user = User(name, email, hash)
 
     db.session.add(new_user)
     db.session.commit()
@@ -110,20 +108,6 @@ def get_users():
     users = User.query.all()
     return users_schema.jsonify(users)
 
-#assign user as admin
-@app.route('/user_admin_status', methods=["PUT"])
-def user_admin_status():
-    user_id = request.json['id']    
-
-    user = User.query.filter_by(id=user_id).first()
-
-    user.admin_status = True
-    
-    db.session.commit()
-    return user_schema.jsonify(user)
-
-
-
 #user delete 
 @app.route('/delete_user', methods=["DELETE"])
 def delete_user():
@@ -135,7 +119,6 @@ def delete_user():
     db.session.commit()
 
     return "User was successfully deleted"
-
 
 #new ticket made 
 @app.route('/new_ticket', methods=["POST"])
@@ -179,7 +162,7 @@ def delete_ticket(id):
 
     return "Ticket was successfully deleted"
 
-#ticket 
+#get ticket to route /ticket/<id> (sample note)
 @app.route("/ticket/<id>", methods=["GET"])
 def get_ticket(id):
     ticket_id = Ticket.query.get(id)
