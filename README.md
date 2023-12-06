@@ -1,4 +1,4 @@
-In this Flask Application we create a backend for a ticketing service, and users. this application makes it so a user is able to create an account while passwords are hashed, as well as make sure a user is the correct user logging in. As for our Tickets you are able to create a ticket with an automatic status of 'new', you are able to edit this status, and delete the tickets when needed
+In this Flask Application I use Flask and SQLlite to create a backend for a ticketing service, and users. this application makes it so a user is able to create an account while passwords are hashed, as well as make sure a user is the correct user logging in. As for our Tickets you are able to create a ticket with an automatic status of 'new', you are able to edit this status, and delete the tickets when needed
 
 Routes:
 #/login - used to login user
