@@ -11,6 +11,7 @@ flask-cors = "*"
 bcrypt = "*"
 jwt = "*"
 pyjwt = "*"
+gunicorn = "==20.0.4"
 
 [dev-packages]
 

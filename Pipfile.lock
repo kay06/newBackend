@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "30fbacae62724ae80004e6afade3aaed68af0bf18dfe03b49bda4f0f087bbcc0"
+            "sha256": "8ef81afd755e666d905a803f85558fb1951f3274f10463357f7b08595d1ec814"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -249,6 +249,15 @@
             "markers": "platform_machine == 'aarch64' or (platform_machine == 'ppc64le' or (platform_machine == 'x86_64' or (platform_machine == 'amd64' or (platform_machine == 'AMD64' or (platform_machine == 'win32' or platform_machine == 'WIN32')))))",
             "version": "==3.0.1"
         },
+        "gunicorn": {
+            "hashes": [
+                "sha256:1904bb2b8a43658807108d59c3f3d56c2b6121a701161de0ddf9ad140073c626",
+                "sha256:cd4a810dd51bf497552cf3f863b575dabd73d6ad6a91075b65936b151cbf4f9c"
+            ],
+            "index": "pypi",
+            "markers": "python_version >= '3.4'",
+            "version": "==20.0.4"
+        },
         "itsdangerous": {
             "hashes": [
                 "sha256:2c2349112351b88699d8d4b6b075022c0808887cb7ad10069318a8b0bc88db44",
@@ -370,6 +379,14 @@
             "index": "pypi",
             "markers": "python_version >= '3.7'",
             "version": "==2.8.0"
+        },
+        "setuptools": {
+            "hashes": [
+                "sha256:1e8fdff6797d3865f37397be788a4e3cba233608e9b509382a2777d25ebde7f2",
+                "sha256:735896e78a4742605974de002ac60562d286fa8051a7e2299445e8e8fbb01aa6"
+            ],
+            "markers": "python_version >= '3.8'",
+            "version": "==69.0.2"
         },
         "sqlalchemy": {
             "hashes": [
