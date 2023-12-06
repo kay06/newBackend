@@ -55,6 +55,7 @@ class TicketSchema(ma.Schema):
 ticket_schema = TicketSchema()
 tickets_schema = TicketSchema(many=True)
 
+#post log in user to route /login
 @app.route('/login', methods=["POST"])
 def login():    
     email = request.json.get("email")
@@ -77,7 +78,7 @@ def login():
 
     return "Invalid email or password", 401
 
-
+#post new user to route /new_user
 @app.route('/new_user', methods=["POST"])
 def add_user():
     name = request.json['name']
@@ -102,25 +103,7 @@ def add_user():
 
     return user_schema.jsonify(user)
 
-#get users
-@app.route("/users", methods=["GET"])
-def get_users():
-    users = User.query.all()
-    return users_schema.jsonify(users)
-
-#user delete 
-@app.route('/delete_user', methods=["DELETE"])
-def delete_user():
-    id = request.json["id"]
-
-    user = User.query.get(id)
-    
-    db.session.delete(user)
-    db.session.commit()
-
-    return "User was successfully deleted"
-
-#new ticket made 
+#post new ticket made to route /new_ticket 
 @app.route('/new_ticket', methods=["POST"])
 def add_ticket():
     user_id = request.json['user_id']
@@ -138,7 +121,7 @@ def add_ticket():
 
     return ticket_schema.jsonify(ticket)
 
-#edit status 
+#put edited ticket to route /edit_ticket/<id> 
 @app.route('/edit_ticket/<id>', methods=["PUT"])
 def edit_ticket(id):
 
@@ -152,7 +135,7 @@ def edit_ticket(id):
     return ticket_schema.jsonify(ticket)
 
 
-#remove ticket 
+#delete ticket to route /delete_ticket/<id> 
 @app.route("/delete_ticket/<id>", methods=["DELETE"])
 def delete_ticket(id):
     ticket = Ticket.query.get(id)
@@ -162,14 +145,14 @@ def delete_ticket(id):
 
     return "Ticket was successfully deleted"
 
-#get ticket to route /ticket/<id> (sample note)
+#get ticket to route /ticket/<id> 
 @app.route("/ticket/<id>", methods=["GET"])
 def get_ticket(id):
     ticket_id = Ticket.query.get(id)
     ticket_array = [ticket_id]
     return ticket_schema.jsonify(ticket_id)
 
-#all tickets
+#get all tickets to route /tickets
 @app.route("/tickets", methods=["GET"])
 def get_tickets():
     all_tickets = Ticket.query.all()
